@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Employee | EmployeeInfo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/noui/nouislider.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+	{%block css_links%}{% endblock css_links%}
+<!--===============================================================================================-->
+</head>
+<body>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="post">
+				{% csrf_token %}
+				<span class="contact100-form-title">
+					Employee Information
+				</span>
+
+				{% for field in form.visible_fields%}
+				{% if field.field.widget.input_type == 'select' %}
+					<div class="wrap-input100 input100-select bg1">
+						<span class="label-input100">{{field.label}}</span>
+						<div>
+							<select class="js-select2" name="{{field.name}}">
+								{% for value, text in field.field.choices %}
+									<option>{{text}}</option>
+								{% endfor %}
+							</select>
+							<div class="dropDownSelect2"></div>
+						</div>
+					</div>
+				{% elif field.field.widget.input_type == 'date' %}
+					<div class="wrap-input100 input100-select bg1" data-validate="{% if field.errors %} {{field.errors.0}}{% endif %}">
+							<span class="label-input100">{{field.label}}</span>
+							<input class="input100" type="date" name="{{field.name}}" placeholder="{{field.label}}" value="{%if field.value%}{{field.value}}{% endif %}">
+							
+					</div>
+				{% else %}
+					<div class="wrap-input100 validate-input bg1" data-validate="{% if field.errors %} {{field.errors.0}}{% endif %}">
+					<span class="label-input100">{{field.label}}</span>
+					<input class="input100" type="text" name="{{field.name}}" placeholder="{{field.label}}" value="{%if field.value%}{{field.value}}{% endif %}">
+				</div>
+				{% endif %}
+				{% endfor %}
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+	{%block js_links%}{% endblock js_links%}
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
