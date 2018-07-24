@@ -11,7 +11,7 @@
                 showValidate(this);
             }
             else {
-                $(this).parent().addClass('true-validate');
+                // $(this).parent().addClass('true-validate');
             }
         })    
     })
@@ -21,21 +21,24 @@
     [ Validate ]*/
     var input = $('.validate-input .input100');
 
-    $('.validate-form').on('submit',function(){
-        var check = true;
+    // $('.validate-form').on('submit',function(){
+    //     var check = true;
 
-        for(var i=0; i<input.length; i++) {
-            if(validate(input[i]) == false){
-                showValidate(input[i]);
-                check=false;
-            }
-        }
+    //     for(var i=0; i<input.length; i++) {
+    //         if(validate(input[i]) == false){
+    //             showValidate(input[i]);
+    //             check=false;
+    //         }
+    //     }
 
-        return check;
-    });
+    //     return check;
+    // });
 
 
     $('.validate-form .input100').each(function(){
+        if($(this).parent().data('validate')!= ''){
+            showValidate(this);
+        }
         $(this).focus(function(){
            hideValidate(this);
            $(this).parent().removeClass('true-validate');
