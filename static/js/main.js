@@ -76,6 +76,11 @@
         $(thisAlert).removeClass('alert-validate');
         $(thisAlert).find('.btn-hide-validate').remove();
     }
+
+    // Redirect to new form from success page
+    $("#employee-success-add-btn").click(function(){
+        window.location.href = "/";
+    });
     
     
 

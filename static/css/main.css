@@ -727,3 +727,18 @@ textarea.input100 {
     padding: 15px 0px 0 0px;
   }
 }
+
+/*Success page*/
+#employee-success-cont{
+  width: 100%;
+  min-height: 150px;
+  margin:20px 0px;
+  box-shadow: 0px 0px 5px -3px;
+  text-align: center;
+  padding:30px;
+}
+
+#employee-success-cont h4{
+  margin-top: 20px;
+  font-weight: bold;
+}
