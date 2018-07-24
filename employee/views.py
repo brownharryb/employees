@@ -28,7 +28,8 @@ class EmployeeView(View):
 	def post(self, request, *args, **kwargs):
 		form = self.form_class(request.POST)
 		if form.is_valid():
-			form.save()
+			employee = form.save()
+			return render(request, 'employee_success.html',{'employee':employee})
 		return render(request, self.template, {'form':form})
 
 
