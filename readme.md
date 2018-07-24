@@ -1,8 +1,7 @@
 ### Simple app for collecting employee information !
 ---
 
-"db_config.py" file is exposed for testing purpose on local PostgresDB
-Setup locally with the following information.
+"db_config.py" file is exposed for testing purpose on local PostgresDB, setup locally with the following information.
 
 ```sh
 
